@@ -18,5 +18,17 @@ module.exports = {
       .where({ username })
       .first();
     return user;
+  },
+  update: async (id, user) => {
+    const updatedUser = await db("user")
+      .where("id", id)
+      .update(user);
+    return updatedUser;
+  },
+  remove: async id => {
+    const deletedUser = await db("user")
+      .where("id", id)
+      .del();
+    return deletedUser;
   }
 };
