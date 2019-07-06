@@ -3,6 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const server = express();
 server.use(express.json());
+//
+const user = require("./api/routes/userRoute");
+//
+server.use("/user", user);
+//
 
 server.get("/", (req, res) => {
   res.send("<h1>Server Running<h1>");
