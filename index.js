@@ -1,10 +1,17 @@
 require("dotenv").config();
 //
 const express = require("express");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const cors = require("cors");
 const server = express();
-server.use(express.json());
 //
 const user = require("./api/routes/userRoute");
+//
+server.use(express.json());
+server.use(helmet());
+server.use(morgan("dev"));
+server.use(cors());
 //
 server.use("/user", user);
 //
