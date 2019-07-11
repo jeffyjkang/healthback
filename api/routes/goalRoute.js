@@ -52,17 +52,17 @@ router.put("/:id", auth.authorize, async (req, res) => {
   if (!decodedToken) {
     return res
       .status(401)
-      .json({ error: "There was an error decoding the token" });
+      .json({ error: "There was an error decoding the token." });
   }
   if (!userId) {
-    res.status(400).json({ error: "Must provide user id." });
+    return res.status(400).json({ error: "Must provide user id." });
   }
   try {
     const requestedGoal = await goalModel.get(id).first();
     if (requestedGoal.userId !== userId) {
       return res
         .status(401)
-        .json({ erro: "Must be creator of goal to modify goal." });
+        .json({ error: "Must be creator of goal to modify goal." });
     }
     const updatedGoal = await goalModel.edit(id, { ...req.body });
     if (!updatedGoal) {
@@ -74,6 +74,41 @@ router.put("/:id", auth.authorize, async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "There was an error updaing the goal." });
+  }
+});
+// delete goal
+router.delete("/:id", auth.authorize, async (req, res) => {
+  const id = req.params.id;
+  const decodedToken = req.decodedToken;
+  const userId = decodedToken.id;
+  if (!id) {
+    return res.status(400).json({ error: "Must provide goal id." });
+  }
+  if (!decodedToken) {
+    return res
+      .status(401)
+      .json({ error: "There was an error decoding the token." });
+  }
+  if (!userId) {
+    return res.status(400).json({ error: "Must provide user id." });
+  }
+  try {
+    const requestedGoal = await goalModel.get(id).first();
+    if (requestedGoal.userId !== userId) {
+      return res
+        .status(401)
+        .json({ error: "Must be creator of goal to delete goal." });
+    }
+    const deletedGoal = await goalModel.remove(id);
+    if (!deletedGoal) {
+      return res
+        .status(400)
+        .json({ error: "The goal with the specified id does not exist." });
+    } else {
+      res.status(200).json({ message: "Goal deleted." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "There was an error deleting the goal." });
   }
 });
 

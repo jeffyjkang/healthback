@@ -20,5 +20,11 @@ module.exports = {
     return db("goal")
       .where({ id })
       .first();
+  },
+  remove: async id => {
+    const deletedGoal = await db("goal")
+      .where("id", id)
+      .del();
+    return deletedGoal;
   }
 };
