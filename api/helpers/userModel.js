@@ -20,10 +20,12 @@ module.exports = {
     return user;
   },
   update: async (id, user) => {
-    const updatedUser = await db("user")
+    await db("user")
       .where("id", id)
       .update(user);
-    return updatedUser;
+    return db("user")
+      .where({ id })
+      .first();
   },
   remove: async id => {
     const deletedUser = await db("user")

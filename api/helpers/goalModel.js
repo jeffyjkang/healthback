@@ -12,5 +12,13 @@ module.exports = {
     return db("goal")
       .where({ id })
       .first();
+  },
+  edit: async (id, goal) => {
+    await db("goal")
+      .where("id", id)
+      .update(goal);
+    return db("goal")
+      .where({ id })
+      .first();
   }
 };
