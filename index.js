@@ -7,6 +7,7 @@ const cors = require("cors");
 const server = express();
 //
 const user = require("./api/routes/userRoute");
+const goal = require("./api/routes/goalRoute");
 //
 server.use(express.json());
 server.use(helmet());
@@ -14,6 +15,7 @@ server.use(morgan("dev"));
 server.use(cors());
 //
 server.use("/user", user);
+server.use("/goal", goal);
 //
 
 server.get("/", (req, res) => {
