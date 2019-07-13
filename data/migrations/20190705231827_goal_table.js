@@ -12,7 +12,9 @@ exports.up = function(knex, Promise) {
       .unsigned()
       .references("id")
       .inTable("user")
-      .notNullable();
+      .notNullable()
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     goal.timestamp("createdAt").defaultTo(knex.fn.now());
   });
 };
