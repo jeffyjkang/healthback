@@ -1,15 +1,16 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("food", food => {
     food.increments("id").primary();
-    food.date("date");
     food.boolean("complete");
     food.string("foodNotes");
     food
-      .integer("planId")
+      .integer("dayId")
       .unsigned()
       .references("id")
-      .inTable("plan")
-      .notNullable();
+      .inTable("day")
+      .notNullable()
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     food.timestamp("createdAt").defaultTo(knex.fn.now());
   });
 };
