@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("plan", plan => {
     plan.increments("id").primary();
-    plan.date("fromDate");
-    plan.date("toDate");
+    plan.date("fromDate").notNullable();
+    plan.date("toDate").notNullable();
     plan.string("exercisePlan");
     plan.string("foodPlan");
     plan.string("sleepPlan");
