@@ -1,15 +1,16 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("sleep", sleep => {
     sleep.increments("id").primary();
-    sleep.date("date");
     sleep.boolean("complete");
-    sleep.string("sleepNotes");
+    sleep.string("foodNotes");
     sleep
-      .integer("planId")
+      .integer("dayId")
       .unsigned()
       .references("id")
-      .inTable("plan")
-      .notNullable();
+      .inTable("day")
+      .notNullable()
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     sleep.timestamp("createdAt").defaultTo(knex.fn.now());
   });
 };

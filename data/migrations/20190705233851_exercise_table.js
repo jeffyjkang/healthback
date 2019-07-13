@@ -1,15 +1,16 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("exercise", exercise => {
     exercise.increments("id").primary();
-    exercise.date("date");
     exercise.boolean("complete");
     exercise.string("exerciseNotes");
     exercise
-      .integer("planId")
+      .integer("dayId")
       .unsigned()
       .references("id")
-      .inTable("plan")
-      .notNullable();
+      .inTable("day")
+      .notNullable()
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     exercise.timestamp("createdAt").defaultTo(knex.fn.now());
   });
 };
