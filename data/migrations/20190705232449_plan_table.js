@@ -3,13 +3,18 @@ exports.up = function(knex, Promise) {
     plan.increments("id").primary();
     plan.date("fromDate");
     plan.date("toDate");
-    plan.string("planDescription");
+    plan.string("exercisePlan");
+    plan.string("foodPlan");
+    plan.string("sleepPlan");
+    plan.string("miscPlan");
     plan
       .integer("goalId")
       .unsigned()
       .references("id")
       .inTable("goal")
-      .notNullable();
+      .notNullable()
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     plan.timestamp("createdAt").defaultTo(knex.fn.now());
   });
 };
