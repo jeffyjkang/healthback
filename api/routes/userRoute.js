@@ -74,7 +74,7 @@ router.put("/edit", auth.authorize, async (req, res) => {
     return res.status(400).json({ error: "Must provide password." });
   }
   try {
-    const updatedUser = await userModel.update(id, { ...req.body });
+    const updatedUser = await userModel.edit(id, { ...req.body });
     if (!updatedUser) {
       return res
         .status(400)
