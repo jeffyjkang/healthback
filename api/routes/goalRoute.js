@@ -110,5 +110,5 @@ router.delete("/:id", auth.authorize, async (req, res) => {
     res.status(500).json({ error: "There was an error deleting the goal." });
   }
 });
-
+//
 module.exports = router;
