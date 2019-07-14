@@ -23,7 +23,6 @@ router.post("/", auth.authorize, async (req, res) => {
   const id = decodedToken.id;
   const goal = req.body;
   goal.userId = id;
-  console.log(goal);
   if (!decodedToken) {
     return res
       .status(401)
