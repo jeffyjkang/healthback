@@ -3,7 +3,9 @@ module.exports = {
   get: id => {
     let query = db("plan");
     if (id) {
-      query = db("plan").where("plan.id", id);
+      query = db("plan")
+        .where({ id })
+        .first();
     }
     return query;
   },
@@ -15,16 +17,15 @@ module.exports = {
   },
   edit: async (id, plan) => {
     await db("plan")
-      .where("id", id)
+      .where({ id })
       .update(plan);
     return db("plan")
       .where({ id })
       .first();
   },
-  remove: async id => {
-    const deletedPlan = await db("plan")
-      .where("id", id)
+  remove: id => {
+    return db("plan")
+      .where({ id })
       .del();
-    return deletedPlan;
   }
 };
