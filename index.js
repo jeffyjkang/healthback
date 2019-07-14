@@ -8,6 +8,7 @@ const server = express();
 //
 const user = require("./api/routes/userRoute");
 const goal = require("./api/routes/goalRoute");
+const plan = require("./api/routes/planRoute");
 //
 server.use(express.json());
 server.use(helmet());
@@ -16,6 +17,7 @@ server.use(cors());
 //
 server.use("/user", user);
 server.use("/goal", goal);
+server.use("/plan", plan);
 //
 
 server.get("/", (req, res) => {

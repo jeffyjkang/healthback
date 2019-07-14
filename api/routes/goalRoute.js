@@ -14,7 +14,7 @@ router.get("/", auth.authorize, async (req, res) => {
     const goals = await goalModel.get();
     res.status(200).json(goals);
   } catch (error) {
-    res.status(500).json({ error: "Error getting the goals" });
+    res.status(500).json({ error: "Error getting the goals." });
   }
 });
 // create goal
