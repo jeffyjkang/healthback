@@ -36,6 +36,13 @@ router.post("/", auth.authorize, async (req, res) => {
     return res.status(400).json({ error: "Must provide plan id." });
   }
   try {
+    const requestedPlan = await planModel.get(day.planId).first();
+    const requestedGoal = await goalModel.get(requestedPlan.goalId).first();
+    if (requestedGoal.userId !== userId) {
+      return res.status(401).json({
+        error: "Must be creator of goal, plan to create day."
+      });
+    }
     const createdDay = await dayModel.create(day);
     res.status(201).json(createdDay);
   } catch (error) {
@@ -66,11 +73,9 @@ router.put("/:id", auth.authorize, async (req, res) => {
     const requestedPlan = await planModel.get(day.planId).first();
     const requestedGoal = await goalModel.get(requestedPlan.goalId).first();
     if (requestedGoal.userId !== userId) {
-      return res
-        .status(401)
-        .json({
-          error: "Must be creator of goal, plan and day to modify day."
-        });
+      return res.status(401).json({
+        error: "Must be creator of goal, plan and day to modify day."
+      });
     }
     const updatedDay = await dayModel.edit(id, { ...req.body });
     if (!updatedDay) {
@@ -105,11 +110,9 @@ router.delete("/:id", auth.authorize, async (req, res) => {
     const requestedPlan = await planModel.get(requestedDay.planId).first();
     const requestedGoal = await goalModel.get(requestedPlan.goalId).first();
     if (requestedGoal.userId !== userId) {
-      return res
-        .status(401)
-        .json({
-          error: "Must be creator of goal, plan and day to delete day."
-        });
+      return res.status(401).json({
+        error: "Must be creator of goal, plan and day to delete day."
+      });
     }
     const deletedDay = await dayModel.remove(id);
     if (!deletedDay) {
