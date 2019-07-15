@@ -9,10 +9,12 @@ exports.up = function(knex, Promise) {
     plan.string("miscPlan");
     plan
       .integer("goalId")
-      .unsigned()
+      .notNullable()
+      .unsigned();
+    plan
+      .foreign("goalId")
       .references("id")
       .inTable("goal")
-      .notNullable()
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
     plan.timestamp("createdAt").defaultTo(knex.fn.now());
