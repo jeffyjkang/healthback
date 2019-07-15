@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const goalModel = require("../helpers/goalModel");
+const planModel = require("../helpers/planModel");
+const dayModel = require("../helpers/dayModel");
 const auth = require("../authorization/auth");
 // get all goals
 router.get("/", auth.authorize, async (req, res) => {
@@ -12,6 +14,15 @@ router.get("/", auth.authorize, async (req, res) => {
   }
   try {
     const goals = await goalModel.get();
+    for (let i = 0; i < goals.length; i++) {
+      goals[i];
+      const plans = await planModel.get().where("goalId", goals[i].id);
+      goals[i].plans = plans;
+      for (let j = 0; j < plans.length; j++) {
+        const days = await dayModel.get().where("planId", plans[j].id);
+        plans[j].days = days;
+      }
+    }
     res.status(200).json(goals);
   } catch (error) {
     res.status(500).json({ error: "Error getting the goals." });
