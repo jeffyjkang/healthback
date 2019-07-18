@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     plan.increments("id").primary();
     plan.date("fromDate").notNullable();
     plan.date("toDate").notNullable();
+    plan.integer("weight");
     plan.string("exercisePlan");
     plan.string("foodPlan");
     plan.string("sleepPlan");

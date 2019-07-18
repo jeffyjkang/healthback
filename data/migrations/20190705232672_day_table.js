@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("day", day => {
     day.increments("id").primary();
-    day.date("dailyDate");
+    day.date("dailyDate").notNullable();
     day.boolean("sleepComplete").defaultTo(false);
     day.boolean("foodComplete").defaultTo(false);
     day.boolean("exerciseComplete").defaultTo(false);
