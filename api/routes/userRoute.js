@@ -57,8 +57,10 @@ router.put("/edit", auth.authorize, async (req, res) => {
   const decodedToken = req.decodedToken;
   const id = decodedToken.id;
   const user = req.body;
-  const hash = bcrypt.hashSync(user.password, 14);
-  user.password = hash;
+  if (user.password) {
+    const hash = bcrypt.hashSync(user.password, 14);
+    user.password = hash;
+  }
   if (!decodedToken) {
     return res
       .status(401)
@@ -70,11 +72,8 @@ router.put("/edit", auth.authorize, async (req, res) => {
   if (!user.username) {
     return res.status(400).json({ error: "Must provide username." });
   }
-  if (!user.password) {
-    return res.status(400).json({ error: "Must provide password." });
-  }
   try {
-    const updatedUser = await userModel.edit(id, { ...req.body });
+    const updatedUser = await userModel.edit(id, { ...user });
     if (!updatedUser) {
       return res
         .status(400)
