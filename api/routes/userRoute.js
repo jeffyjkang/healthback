@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
 });
 // register
 router.post("/register", async (req, res) => {
+  console.log("1");
   const user = req.body;
   if (!user.username) {
     return res.status(400).json({ error: "Must provide username." });
