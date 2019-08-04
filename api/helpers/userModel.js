@@ -10,7 +10,7 @@ module.exports = {
     return query;
   },
   register: async user => {
-    const [id] = await db("user").insert(user);
+    const id = await db("user").insert(user);
     return db("user")
       .where({ id })
       .first();
