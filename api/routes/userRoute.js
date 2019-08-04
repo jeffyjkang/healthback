@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
   console.log("2");
   try {
     console.log("3");
-    const newUser = await userModel.register(user);
+    const newUser = await userModel.register(...user);
     const token = auth.generateToken(newUser);
     console.log("6");
     res.status(201).json(token);
