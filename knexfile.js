@@ -4,13 +4,13 @@ module.exports = {
   development: {
     client: "sqlite3",
     connection: {
-      filename: "./dev.sqlite3"
+      filename: "/dev.sqlite3"
     },
     migrations: {
-      directory: "./data/migrations"
+      directory: "/data/migrations"
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: "/data/seeds"
     },
     pool: {
       afterCreate: function(conn, cb) {
@@ -41,10 +41,10 @@ module.exports = {
     connection: process.env.DATABASE_URL,
 
     migrations: {
-      directory: "./data/migrations"
+      directory: "/data/migrations"
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: "/data/seeds"
     }
   }
 };
