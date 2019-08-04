@@ -24,9 +24,12 @@ router.post("/register", async (req, res) => {
   }
   const hash = bcrypt.hashSync(user.password, 14);
   user.password = hash;
+  console.log("2");
   try {
+    console.log("3");
     const newUser = await userModel.register(user);
     const token = auth.generateToken(newUser);
+    console.log("6");
     res.status(201).json(token);
   } catch (error) {
     res.status(500).json({ error: "There was an error registering user." });
