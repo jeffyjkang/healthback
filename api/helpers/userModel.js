@@ -10,6 +10,7 @@ module.exports = {
     return query;
   },
   register: async user => {
+    console.log(user);
     console.log("4");
     const [id] = await db("user").insert(user);
     console.log("5");
