@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
 // register
 router.post("/register", async (req, res) => {
   const user = req.body;
-  console.log("1", user);
   if (!user.username) {
     return res.status(400).json({ error: "Must provide username." });
   }
@@ -24,12 +23,9 @@ router.post("/register", async (req, res) => {
   }
   const hash = bcrypt.hashSync(user.password, 14);
   user.password = hash;
-  console.log("2", user);
   try {
-    console.log("3", user);
     const newUser = await userModel.register(user);
     const token = auth.generateToken(newUser);
-    console.log("6", newUser);
     res.status(201).json(token);
   } catch (error) {
     res.status(500).json({ error: "There was an error registering user." });
