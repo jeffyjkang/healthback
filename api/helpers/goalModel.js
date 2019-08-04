@@ -10,10 +10,9 @@ module.exports = {
     return query;
   },
   create: async goal => {
-    console.log(goal);
-    console.log("4");
+    console.log("4", goal);
     const [id] = await db("goal").insert(goal);
-    console.log("5");
+    console.log("5", id);
     return db("goal")
       .where({ id })
       .first();
