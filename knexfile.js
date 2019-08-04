@@ -41,10 +41,10 @@ module.exports = {
     connection: process.env.DATABASE_URL,
 
     migrations: {
-      directory: "./db/migrations"
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./db/seeds"
+      directory: "./data/seeds"
     }
   }
 };
