@@ -9,9 +9,6 @@ module.exports = {
     migrations: {
       directory: "./data/migrations"
     },
-    seeds: {
-      directory: "./data/seeds"
-    },
     pool: {
       afterCreate: function(conn, cb) {
         conn.run("PRAGMA foreign_keys = ON", cb);
@@ -41,10 +38,13 @@ module.exports = {
     connection: process.env.DATABASE_URL,
 
     migrations: {
-      directory: "./db/migrations"
+      directory: "./data/migrations"
     },
-    seeds: {
-      directory: "./db/seeds"
-    }
+    pool: {
+      afterCreate: function(conn, cb) {
+        conn.run("PRAGMA foreign_keys = ON", cb);
+      }
+    },
+    useNullAsDefault: true
   }
 };
