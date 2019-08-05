@@ -16,7 +16,12 @@ module.exports = {
   //     .first();
   // },
   create: plan => {
-    return db("plan").insert(plan);
+    db("plan")
+      .insert(plan)
+      .then(res => {
+        console.log(res);
+        return res;
+      });
   },
   // edit: async (id, plan) => {
   //   await db("plan")
