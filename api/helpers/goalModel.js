@@ -9,19 +9,27 @@ module.exports = {
     }
     return query;
   },
-  create: async goal => {
-    const [id] = await db("goal").insert(goal);
-    return db("goal")
-      .where({ id })
-      .first();
+  // create: async goal => {
+  //   const [id] = await db("goal").insert(goal);
+  //   return db("goal")
+  //     .where({ id })
+  //     .first();
+  // },
+  create: goal => {
+    return db("goal").insert(goal);
   },
-  edit: async (id, goal) => {
-    await db("goal")
+  // edit: async (id, goal) => {
+  //   await db("goal")
+  //     .where({ id })
+  //     .update(goal);
+  //   return db("goal")
+  //     .where({ id })
+  //     .first();
+  // },
+  edit: (id, goal) => {
+    return db("goal")
       .where({ id })
       .update(goal);
-    return db("goal")
-      .where({ id })
-      .first();
   },
   remove: id => {
     return db("goal")
