@@ -19,8 +19,9 @@ module.exports = {
     db("plan")
       .insert(plan)
       .then(res => {
-        console.log(res[0]["id"]);
-        return res[0]["id"];
+        console.log(res);
+        console.log(id);
+        return res;
       });
   },
   // edit: async (id, plan) => {
