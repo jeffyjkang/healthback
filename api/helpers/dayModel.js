@@ -16,6 +16,7 @@ module.exports = {
   //     .first();
   // },
   create: day => {
+    console.log("day", day);
     return db("day").insert(day);
   },
   // edit: async (id, day) => {
