@@ -23,8 +23,8 @@ module.exports = {
         createdPlan = createdPlan[0];
         console.log(createdPlan);
         const planId = createdPlan.id;
-        const fromDate = createdPlan.fromDate.toString();
-        const toDate = createdPlan.toDate.toString();
+        const fromDate = createdPlan.fromDate.toISOString();
+        const toDate = createdPlan.toDate.toISOString();
         console.log(planId);
         console.log(fromDate);
         console.log(toDate);
