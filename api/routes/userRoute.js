@@ -81,7 +81,7 @@ router.put("/edit", auth.authorize, async (req, res) => {
         .status(400)
         .json({ error: "The user with the specified id does not exist." });
     } else {
-      const token = auth.generateToken(updatedUser);
+      const token = auth.generateToken(updatedUser[0]);
       res.status(200).json(token);
     }
   } catch (error) {
