@@ -25,6 +25,7 @@ router.post("/register", async (req, res) => {
   user.password = hash;
   try {
     const newUser = await userModel.register(user);
+    console.log(newUser);
     const token = auth.generateToken(newUser);
     res.status(201).json(token);
   } catch (error) {
