@@ -20,6 +20,7 @@ module.exports = {
       .insert(plan)
       .returning("*")
       .then(createdPlan => {
+        createdPlan = createdPlan[0];
         const planId = createdPlan.id;
         console.log(planId);
         const fromDay = createdPlan.fromDate.substring(0, 10).split("-")[2];
