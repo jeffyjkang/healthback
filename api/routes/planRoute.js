@@ -43,26 +43,32 @@ router.post("/", auth.authorize, async (req, res) => {
         .json({ error: "Must be creator of goal to create plan." });
     }
     const createdPlan = await planModel.create(plan);
-    // const planId = createdPlan.id;
-    // const fromDay = createdPlan.fromDate.split(" ")[1];
-    // const toDay = createdPlan.toDate.split(" ")[1];
-    // if (Number(toDay) < 7) {
-    //   for (let i = 0; i < 7 - Number(toDay); i++) {
-    //     let dailyDate = `${createdPlan.fromDate.split(" ")[0]} ${Number(
-    //       fromDay
-    //     ) + i}`;
-    //     dayModel.create({ dailyDate, planId });
-    //   }
-    //   for (let i = 0; i < Number(toDay); i++) {
-    //     let dailyDate = `${createdPlan.toDate.split(" ")[0]} ${i + 1}`;
-    //     dayModel.create({ dailyDate, planId });
-    //   }
-    // } else {
-    //   for (let i = Number(fromDay); i < Number(toDay) + 1; i++) {
-    //     let dailyDate = `${createdPlan.fromDate.split(" ")[0]} ${i}`;
-    //     dayModel.create({ dailyDate, planId });
-    //   }
-    // }
+    const planId = createdPlan.id;
+    const fromDay = createdPlan.fromDate.substring(0, 10).split("-")[2];
+    const toDay = createdPlan.toDate.substring(0, 10).split("-")[2];
+    if (Number(toDay) < 7) {
+      for (let i = 0; i < 7 - Number(toDay); i++) {
+        let dailyDate = `${
+          createdPlan.fromDate.substring(0, 10).split("-")[0]
+        }-${createdPlan.fromDate.substring(0, 10).split("-")[1]}-${Number(
+          fromDay
+        ) + i}`;
+        dayModel.create({ dailyDate, planId });
+      }
+      for (let i = 0; i < Number(toDay); i++) {
+        let dailyDate = `${createdPlan.toDate.substring(0, 10).split("-")[0]}-${
+          createdPlan.toDate.substring(0, 10)[1]
+        }-${i + 1}`;
+        dayModel.create({ dailyDate, planId });
+      }
+    } else {
+      for (let i = Number(fromDay); i < Number(toDay) + 1; i++) {
+        let dailyDate = `${
+          createdPlan.fromDate.substring(0, 10).split("-")[0]
+        }-${createdPlan.fromDate.substring(0, 10)[1]}-${i}`;
+        dayModel.create({ dailyDate, planId });
+      }
+    }
     res.status(201).json(createdPlan);
   } catch (error) {
     res.status(500).json({ error: "There was an error creating a plan." });
