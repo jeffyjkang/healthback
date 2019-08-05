@@ -64,14 +64,14 @@ router.post("/", auth.authorize, async (req, res) => {
         let dailyDate = `${toDate.substring(0, 10).split("-")[0]}-${
           toDate.substring(0, 10)[1]
         }-${i + 1}`;
-        db("day").insert({ dailyDate, planId });
+        dayModel.create({ dailyDate, planId });
       }
     } else {
       for (let i = Number(fromDay); i < Number(toDay) + 1; i++) {
         let dailyDate = `${fromDate.substring(0, 10).split("-")[0]}-${
           fromDate.substring(0, 10)[1]
         }-${i}`;
-        db("day").insert({ dailyDate, planId });
+        dayModel.create({ dailyDate, planId });
       }
     }
     res.status(201).json(createdPlan);
