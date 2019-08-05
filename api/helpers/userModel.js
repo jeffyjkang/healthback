@@ -9,11 +9,14 @@ module.exports = {
     }
     return query;
   },
-  register: async user => {
-    const [id] = await db("user").insert(user);
-    return db("user")
-      .where({ id })
-      .first();
+  // register: async user => {
+  //   const [id] = await db("user").insert(user);
+  //   return db("user")
+  //     .where({ id })
+  //     .first();
+  // },
+  register: user => {
+    return db("user").insert(user);
   },
   login: async username => {
     const user = await db("user")
