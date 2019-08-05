@@ -41,6 +41,7 @@ module.exports = {
     migrations: {
       directory: "./data/migrations"
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    ssl: true
   }
 };
