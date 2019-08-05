@@ -16,7 +16,7 @@ module.exports = {
   //     .first();
   // },
   create: goal => {
-    db("goal").insert(goal);
+    return db("goal").insert(goal);
   },
   // edit: async (id, goal) => {
   //   await db("goal")
