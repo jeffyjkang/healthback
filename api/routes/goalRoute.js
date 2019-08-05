@@ -34,8 +34,6 @@ router.post("/", auth.authorize, async (req, res) => {
   const id = decodedToken.id;
   const goal = req.body;
   goal.userId = id;
-  console.log("1", goal);
-  console.log("decode1", decodedToken);
   if (!decodedToken) {
     return res
       .status(401)
@@ -45,9 +43,7 @@ router.post("/", auth.authorize, async (req, res) => {
     return res.status(400).json({ error: "Must provide user id." });
   }
   try {
-    console.log("2", goal);
     const createdGoal = await goalModel.create(goal);
-    console.log("4", createdGoal);
     res.status(201).json(createdGoal);
   } catch (error) {
     res.status(500).json({ error: "There was an error creating a goal." });
