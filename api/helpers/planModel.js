@@ -20,6 +20,7 @@ module.exports = {
       .insert(plan)
       .then(res => {
         console.log(res);
+        console.log(id);
         return res;
       });
   },
