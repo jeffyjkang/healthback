@@ -18,6 +18,7 @@ module.exports = {
   create: plan => {
     db("plan")
       .insert(plan)
+      .returning("id")
       .then(res => {
         console.log(res);
         console.log(id);
