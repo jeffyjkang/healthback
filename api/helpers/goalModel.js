@@ -17,8 +17,12 @@ module.exports = {
   // },
   create: goal => {
     console.log("3", goal);
-    console.log(db("goal").insert(goal));
-    return db("goal").insert(goal);
+    db("goal")
+      .insert(goal)
+      .then(res => {
+        console.log("res", res);
+        return res;
+      });
   },
   // edit: async (id, goal) => {
   //   await db("goal")
