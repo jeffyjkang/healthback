@@ -36,14 +36,24 @@ module.exports = {
               fromDate.substring(0, 10).split("-")[1]
             }-${Number(fromDay) + i}`;
             console.log(dailyDate);
-            db("day").insert({ dailyDate, planId });
+            db("day")
+              .insert({ dailyDate, planId })
+              .then(res => {
+                console.log(res);
+                return res;
+              });
           }
           for (let i = 0; i < Number(toDay); i++) {
             let dailyDate = `${toDate.substring(0, 10).split("-")[0]}-${
               toDate.substring(0, 10).split("-")[1]
             }-${i + 1}`;
             console.log(dailyDate);
-            db("day").insert({ dailyDate, planId });
+            db("day")
+              .insert({ dailyDate, planId })
+              .then(res => {
+                console.log(res);
+                return res;
+              });
           }
         } else {
           for (let i = Number(fromDay); i < Number(toDay) + 1; i++) {
@@ -51,7 +61,12 @@ module.exports = {
               fromDate.substring(0, 10).split("-")[1]
             }-${i}`;
             console.log(dailyDate);
-            db("day").insert({ dailyDate, planId });
+            db("day")
+              .insert({ dailyDate, planId })
+              .then(res => {
+                console.log(res);
+                return res;
+              });
           }
         }
         return planId;
