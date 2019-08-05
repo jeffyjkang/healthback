@@ -40,7 +40,8 @@ module.exports = {
   edit: (id, user) => {
     return db("user")
       .where({ id })
-      .update(user);
+      .update(user)
+      .returning("*");
   },
   remove: id => {
     return db("user")

@@ -75,6 +75,7 @@ router.put("/edit", auth.authorize, async (req, res) => {
   }
   try {
     const updatedUser = await userModel.edit(id, { ...req.body });
+    console.log(updatedUser);
     if (!updatedUser) {
       return res
         .status(400)
