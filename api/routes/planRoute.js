@@ -43,6 +43,7 @@ router.post("/", auth.authorize, async (req, res) => {
         .json({ error: "Must be creator of goal to create plan." });
     }
     const createdPlan = await planModel.create(plan);
+    console.log(createdPlan);
     const planId = createdPlan.id;
     const fromDay = createdPlan.fromDate.substring(0, 10).split("-")[2];
     const toDay = createdPlan.toDate.substring(0, 10).split("-")[2];
