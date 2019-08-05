@@ -18,19 +18,29 @@ module.exports = {
   register: user => {
     return db("user").insert(user);
   },
-  login: async username => {
-    const user = await db("user")
+  // login: async username => {
+  //   const user = await db("user")
+  //     .where({ username })
+  //     .first();
+  //   return user;
+  // },
+  login: username => {
+    return db("user")
       .where({ username })
       .first();
-    return user;
   },
-  edit: async (id, user) => {
-    await db("user")
-      .where({ id })
-      .update(user);
+  // edit: async (id, user) => {
+  //   await db("user")
+  //     .where({ id })
+  //     .update(user);
+  //   return db("user")
+  //     .where({ id })
+  //     .first();
+  // },
+  edit: (id, user) => {
     return db("user")
       .where({ id })
-      .first();
+      .update(user);
   },
   remove: id => {
     return db("user")

@@ -9,19 +9,27 @@ module.exports = {
     }
     return query;
   },
-  create: async plan => {
-    const [id] = await db("plan").insert(plan);
-    return db("plan")
-      .where({ id })
-      .first();
+  // create: async plan => {
+  //   const [id] = await db("plan").insert(plan);
+  //   return db("plan")
+  //     .where({ id })
+  //     .first();
+  // },
+  create: plan => {
+    return db("plan").insert(plan);
   },
-  edit: async (id, plan) => {
-    await db("plan")
+  // edit: async (id, plan) => {
+  //   await db("plan")
+  //     .where({ id })
+  //     .update(plan);
+  //   return db("plan")
+  //     .where({ id })
+  //     .first();
+  // },
+  edit: (id, plan) => {
+    return db("plan")
       .where({ id })
       .update(plan);
-    return db("plan")
-      .where({ id })
-      .first();
   },
   remove: id => {
     return db("plan")
