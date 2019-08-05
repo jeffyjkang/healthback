@@ -9,25 +9,15 @@ module.exports = {
     }
     return query;
   },
-  // create: async plan => {
-  //   const [id] = await db("plan").insert(plan);
-  //   return db("plan")
-  //     .where({ id })
-  //     .first();
-  // },
   create: plan => {
     db("plan")
       .insert(plan)
       .returning("*")
       .then(createdPlan => {
         createdPlan = createdPlan[0];
-        console.log(createdPlan);
         const planId = createdPlan.id;
         const fromDate = createdPlan.fromDate.toISOString();
         const toDate = createdPlan.toDate.toISOString();
-        console.log(planId);
-        console.log(fromDate);
-        console.log(toDate);
         const fromDay = fromDate.substring(0, 10).split("-")[2];
         const toDay = toDate.substring(0, 10).split("-")[2];
         if (Number(toDay) < 7) {
@@ -35,11 +25,9 @@ module.exports = {
             let dailyDate = `${fromDate.substring(0, 10).split("-")[0]}-${
               fromDate.substring(0, 10).split("-")[1]
             }-${Number(fromDay) + i}`;
-            console.log(dailyDate);
             db("day")
               .insert({ dailyDate, planId })
               .then(res => {
-                console.log(res);
                 return res;
               });
           }
@@ -47,11 +35,9 @@ module.exports = {
             let dailyDate = `${toDate.substring(0, 10).split("-")[0]}-${
               toDate.substring(0, 10).split("-")[1]
             }-${i + 1}`;
-            console.log(dailyDate);
             db("day")
               .insert({ dailyDate, planId })
               .then(res => {
-                console.log(res);
                 return res;
               });
           }
@@ -60,11 +46,9 @@ module.exports = {
             let dailyDate = `${fromDate.substring(0, 10).split("-")[0]}-${
               fromDate.substring(0, 10).split("-")[1]
             }-${i}`;
-            console.log(dailyDate);
             db("day")
               .insert({ dailyDate, planId })
               .then(res => {
-                console.log(res);
                 return res;
               });
           }
@@ -72,14 +56,6 @@ module.exports = {
         return planId;
       });
   },
-  // edit: async (id, plan) => {
-  //   await db("plan")
-  //     .where({ id })
-  //     .update(plan);
-  //   return db("plan")
-  //     .where({ id })
-  //     .first();
-  // },
   edit: (id, plan) => {
     return db("plan")
       .where({ id })
