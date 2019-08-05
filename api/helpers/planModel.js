@@ -40,7 +40,7 @@ module.exports = {
           }
           for (let i = 0; i < Number(toDay); i++) {
             let dailyDate = `${toDate.substring(0, 10).split("-")[0]}-${
-              toDate.substring(0, 10)[1]
+              toDate.substring(0, 10).split("-")[1]
             }-${i + 1}`;
             console.log(dailyDate);
             db("day").insert({ dailyDate, planId });
@@ -48,7 +48,7 @@ module.exports = {
         } else {
           for (let i = Number(fromDay); i < Number(toDay) + 1; i++) {
             let dailyDate = `${fromDate.substring(0, 10).split("-")[0]}-${
-              fromDate.substring(0, 10)[1]
+              fromDate.substring(0, 10).split("-")[1]
             }-${i}`;
             console.log(dailyDate);
             db("day").insert({ dailyDate, planId });
