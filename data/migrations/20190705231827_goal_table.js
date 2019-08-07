@@ -2,7 +2,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable("goal", goal => {
     goal.increments("id").primary();
     goal.date("date").notNullable();
-    goal.integer("weight");
+    goal.float("weight");
     goal.string("exerciseGoal");
     goal.string("foodGoal");
     goal.string("sleepGoal");
